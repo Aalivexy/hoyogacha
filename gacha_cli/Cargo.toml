@@ -1,0 +1,9 @@
+[package]
+name = "gacha_cli"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+argh = "0.1"
+gacha = { path = "../gacha" }
+url = "2"

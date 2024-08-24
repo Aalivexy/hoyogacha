@@ -1,0 +1,11 @@
+[workspace]
+resolver = "2"
+
+members = [
+    "gacha", "gacha_cli", "uigf",
+]
+
+[profile.release]
+lto = true
+strip = true
+opt-level = "s"
