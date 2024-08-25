@@ -2,6 +2,7 @@ use crate::{LanguageCode, Uid};
 use serde::{Deserialize, Serialize};
 
 /// HK4E 原神
+#[serde_with::skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Hash, Serialize, Deserialize)]
 pub struct Hk4e {
     /// UID
@@ -15,6 +16,7 @@ pub struct Hk4e {
 }
 
 /// 原神抽卡记录
+#[serde_with::skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Hash, Serialize, Deserialize)]
 pub struct Hk4eItem {
     /// UIGF 卡池类型，用于区分卡池类型不同，但卡池保底计算相同的物品

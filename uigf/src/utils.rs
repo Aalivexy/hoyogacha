@@ -1,3 +1,4 @@
+use crate::{hk4e::Hk4e, hkrpg::Hkrpg, nap::Nap, Info, UigfV4};
 use serde::{Deserialize, Serialize};
 use std::{
     error::Error,
@@ -39,6 +40,63 @@ pub enum ExportTimestamp {
 pub enum Uid {
     String(String),
     Integer(u64),
+}
+
+impl UigfV4 {
+    pub fn to_json(&self) -> Result<String, Box<dyn std::error::Error>> {
+        Ok(serde_json::to_string(self)?)
+    }
+
+    pub fn from_json(json: &str) -> Result<Self, Box<dyn std::error::Error>> {
+        Ok(serde_json::from_str(json)?)
+    }
+
+    pub fn new() -> Self {
+        Self {
+            info: Info::new(),
+            hk4e: None,
+            hkrpg: None,
+            nap: None,
+        }
+    }
+
+    pub fn new_hk4e(hk4e: Vec<Hk4e>) -> Self {
+        Self {
+            info: Info::new(),
+            hk4e: Some(hk4e),
+            hkrpg: None,
+            nap: None,
+        }
+    }
+
+    pub fn new_hkrpg(hkrpg: Vec<Hkrpg>) -> Self {
+        Self {
+            info: Info::new(),
+            hk4e: None,
+            hkrpg: Some(hkrpg),
+            nap: None,
+        }
+    }
+
+    pub fn new_nap(nap: Vec<Nap>) -> Self {
+        Self {
+            info: Info::new(),
+            hk4e: None,
+            hkrpg: None,
+            nap: Some(nap),
+        }
+    }
+}
+
+impl Info {
+    pub fn new() -> Self {
+        Self {
+            export_timestamp: ExportTimestamp::now(),
+            export_app: concat!("lib", env!("CARGO_CRATE_NAME")).into(),
+            export_app_version: env!("CARGO_PKG_VERSION").into(),
+            version: "v4.0".into(),
+        }
+    }
 }
 
 impl ExportTimestamp {
