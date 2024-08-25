@@ -35,40 +35,50 @@ pub fn get_uigf_with_url_all(game_type: GameType, url: Url) -> Result<UigfV4, Bo
                 }]))
             }
         }
-        GameType::HkrpgCN | GameType::HkrpgGlobal => uigf::hkrpg::GachaType::all_variants()
-            .iter()
-            .map(|gacha_type| get_uigf_with_url(GachaType::Hkrpg(*gacha_type), url.clone()))
-            .collect::<Result<Vec<_>, _>>()
-            .map(|uigf_data| {
-                let data = uigf_data
-                    .iter()
-                    .filter_map(|uigf_data| uigf_data.hkrpg.clone())
-                    .flatten()
-                    .collect::<Vec<_>>();
-                UigfV4::new_hkrpg(vec![Hkrpg {
+        GameType::HkrpgCN | GameType::HkrpgGlobal => {
+            let uigf_data = uigf::hkrpg::GachaType::all_variants()
+                .iter()
+                .map(|gacha_type| get_uigf_with_url(GachaType::Hkrpg(*gacha_type), url.clone()))
+                .filter_map(|uigf_data| uigf_data.ok())
+                .collect::<Vec<_>>();
+            let data = uigf_data
+                .iter()
+                .filter_map(|uigf_data| uigf_data.hkrpg.clone())
+                .flatten()
+                .collect::<Vec<_>>();
+            if data.is_empty() {
+                Err("No data found".into())
+            } else {
+                Ok(UigfV4::new_hkrpg(vec![Hkrpg {
                     uid: data[0].uid.clone(),
                     timezone: data[0].timezone,
                     lang: data[0].lang,
                     list: data.into_iter().map(|data| data.list).flatten().collect(),
-                }])
-            }),
-        GameType::NapCN | GameType::NapGlobal => uigf::nap::GachaType::all_variants()
-            .iter()
-            .map(|gacha_type| get_uigf_with_url(GachaType::Nap(*gacha_type), url.clone()))
-            .collect::<Result<Vec<_>, _>>()
-            .map(|uigf_data| {
-                let data = uigf_data
-                    .iter()
-                    .filter_map(|uigf_data| uigf_data.nap.clone())
-                    .flatten()
-                    .collect::<Vec<_>>();
-                UigfV4::new_nap(vec![Nap {
+                }]))
+            }
+        }
+        GameType::NapCN | GameType::NapGlobal => {
+            let uigf_data = uigf::nap::GachaType::all_variants()
+                .iter()
+                .map(|gacha_type| get_uigf_with_url(GachaType::Nap(*gacha_type), url.clone()))
+                .filter_map(|uigf_data| uigf_data.ok())
+                .collect::<Vec<_>>();
+            let data = uigf_data
+                .iter()
+                .filter_map(|uigf_data| uigf_data.nap.clone())
+                .flatten()
+                .collect::<Vec<_>>();
+            if data.is_empty() {
+                Err("No data found".into())
+            } else {
+                Ok(UigfV4::new_nap(vec![Nap {
                     uid: data[0].uid.clone(),
                     timezone: data[0].timezone,
                     lang: data[0].lang,
                     list: data.into_iter().map(|data| data.list).flatten().collect(),
-                }])
-            }),
+                }]))
+            }
+        }
     }
 }
 
