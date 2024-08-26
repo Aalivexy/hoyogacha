@@ -1,9 +1,3 @@
-pub trait AllVariants{
-    fn all_variants() -> &'static [Self]
-    where
-        Self: Sized;
-}
-
 #[macro_export]
 macro_rules! enum_with_str {
     ($(#[$enum_meta:meta])* $name:ident { $($(#[$meta:meta])* $variant:ident => $str_val:expr),* $(,)? }) => {
@@ -24,8 +18,8 @@ macro_rules! enum_with_str {
             )*
         }
 
-        impl crate::AllVariants for $name {
-            fn all_variants() -> &'static [$name] {
+        impl $name {
+            pub fn all_variants() -> &'static [$name] {
                 &[$($name::$variant),*]
             }
         }

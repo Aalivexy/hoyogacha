@@ -4,7 +4,7 @@ use crate::{
     GachaType, GameType,
 };
 use std::error::Error;
-use uigf::{hk4e::Hk4e, hkrpg::Hkrpg, nap::Nap, AllVariants, Info, UigfV4};
+use uigf::{hk4e::Hk4e, hkrpg::Hkrpg, nap::Nap, Info, UigfV4};
 use url::Url;
 
 pub fn get_uigf_all(game_type: GameType) -> Result<UigfV4, Box<dyn Error>> {
