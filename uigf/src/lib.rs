@@ -9,7 +9,7 @@ pub use utils::*;
 pub use enum_with_str::AllVariants;
 
 /// 统一可交换抽卡记录标准 v4.0
-/// https://uigf.org/standards/uigf.html
+/// h<ttps://uigf.org/standards/uigf.html>
 #[serde_with::skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Hash, serde::Serialize, serde::Deserialize)]
 pub struct UigfV4 {

@@ -45,6 +45,7 @@ pub fn get_gacha_url_with_game_data_path(
     .into_iter()
     .rev()
     .filter_map(|line| re.captures(line))
+    .filter(|cap| cap.len() >= 1)
     .filter_map(|cap| Url::from_str(&cap[0]).ok())
     .find_map(check_url)
     .ok_or("No valid URL found".into())
