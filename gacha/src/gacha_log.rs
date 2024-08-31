@@ -140,5 +140,5 @@ pub fn get_gacha_log_with_url(
         .append_pair("gacha_type", &gacha_type)
         .append_pair("real_gacha_type", &gacha_type)
         .append_pair("size", "20");
-    fetch_gacha_log(dbg!(url))
+    Ok(fetch_gacha_log(url).unwrap())
 }

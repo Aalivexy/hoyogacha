@@ -66,9 +66,7 @@ impl TryFrom<ResponseData> for Hkrpg {
         dbg!(value.clone());
         Ok(Self {
             uid: value.list[0].uid.parse()?,
-            timezone: value
-                .region_time_zone
-                .unwrap_or(get_time_zone_by_uid(&value.list[0].uid)),
+            timezone: value.region_time_zone.unwrap(),
             lang: Some(value.list[0].lang.clone()),
             list: value
                 .list
@@ -88,9 +86,7 @@ impl TryFrom<ResponseData> for Nap {
         }
         Ok(Self {
             uid: value.list[0].uid.parse()?,
-            timezone: value
-                .region_time_zone
-                .unwrap_or(get_time_zone_by_uid(&value.list[0].uid)),
+            timezone: value.region_time_zone.unwrap(),
             lang: Some(value.list[0].lang.clone()),
             list: value
                 .list

@@ -36,7 +36,7 @@ pub struct NapItem {
     /// 物品等级，米哈游 API 返回
     pub rank_type: Option<String>,
     /// 记录内部 ID，米哈游 API 返回
-    pub id: Option<String>,
+    pub id: String,
 }
 
 enum_with_str! {
