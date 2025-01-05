@@ -8,7 +8,7 @@ pub mod nap;
 pub use utils::*;
 
 /// 统一可交换抽卡记录标准 v4.0
-/// h<ttps://uigf.org/standards/uigf.html>
+/// <https://uigf.org/standards/uigf.html>
 #[serde_with::skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Hash, serde::Serialize, serde::Deserialize)]
 pub struct UigfV4 {

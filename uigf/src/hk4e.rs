@@ -73,9 +73,9 @@ enum_with_str! {
     }
 }
 
-impl GachaType {
-    pub fn to_uigf(&self) -> UigfGachaType {
-        match self {
+impl From<GachaType> for UigfGachaType {
+    fn from(gacha_type: GachaType) -> Self {
+        match gacha_type {
             GachaType::PermanentWish => UigfGachaType::PermanentWish,
             GachaType::NoviceWishes => UigfGachaType::NoviceWishes,
             GachaType::CharacterEventWish => UigfGachaType::CharacterEventWish,

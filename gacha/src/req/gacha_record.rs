@@ -23,7 +23,7 @@ impl TryFrom<GachaRecord> for Hk4eItem {
         let gacha_type = value.gacha_type.parse()?;
         Ok(Self {
             gacha_type,
-            uigf_gacha_type: gacha_type.to_uigf(),
+            uigf_gacha_type: gacha_type.into(),
             item_id: value.item_id,
             count: value.count,
             time: value.time,
