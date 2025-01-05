@@ -10,7 +10,7 @@ pub use utils::*;
 
 /// 统一可交换抽卡记录标准 v4.0
 /// <https://uigf.org/standards/uigf.html>
-#[serde_with::skip_serializing_none]
+#[serde_with_macros::skip_serializing_none]
 #[derive(Debug, Clone, Default, PartialEq, Hash, Serialize, Deserialize)]
 pub struct UigfV4 {
     pub info: Info,

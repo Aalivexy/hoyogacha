@@ -2,7 +2,7 @@ use crate::{LanguageCode, Uid};
 use serde::{Deserialize, Serialize};
 
 /// 崩坏：星穹铁道
-#[serde_with::skip_serializing_none]
+#[serde_with_macros::skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Hash, Serialize, Deserialize)]
 pub struct Hkrpg {
     /// UID
@@ -16,7 +16,7 @@ pub struct Hkrpg {
 }
 
 /// 崩坏：星穹铁道抽卡记录
-#[serde_with::skip_serializing_none]
+#[serde_with_macros::skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Hash, Serialize, Deserialize)]
 pub struct HkrpgItem {
     /// 卡池 Id

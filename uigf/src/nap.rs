@@ -2,7 +2,7 @@ use crate::{LanguageCode, Uid};
 use serde::{Deserialize, Serialize};
 
 /// 绝区零
-#[serde_with::skip_serializing_none]
+#[serde_with_macros::skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Hash, Serialize, Deserialize)]
 pub struct Nap {
     /// UID
@@ -16,7 +16,7 @@ pub struct Nap {
 }
 
 /// 绝区零抽卡记录
-#[serde_with::skip_serializing_none]
+#[serde_with_macros::skip_serializing_none]
 #[derive(Debug, Clone, PartialEq, Hash, Serialize, Deserialize)]
 pub struct NapItem {
     /// 卡池 Id
