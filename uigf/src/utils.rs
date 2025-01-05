@@ -1,8 +1,7 @@
 use crate::{hk4e::Hk4e, hkrpg::Hkrpg, nap::Nap, Info, UigfV4};
 use serde::{Deserialize, Serialize};
 use std::{
-    error::Error,
-    fmt::{Display, Formatter},
+    convert::Infallible, error::Error, fmt::{Display, Formatter}, str::FromStr
 };
 
 enum_with_str! {
@@ -97,7 +96,7 @@ impl ExportTimestamp {
         Self::Integer(
             std::time::SystemTime::now()
                 .duration_since(std::time::UNIX_EPOCH)
-                .unwrap()
+                .unwrap_or_default()
                 .as_secs(),
         )
     }
@@ -112,45 +111,43 @@ impl Default for ExportTimestamp {
 impl Display for ExportTimestamp {
     fn fmt(&self, f: &mut Formatter) -> std::fmt::Result {
         match self {
-            ExportTimestamp::String(s) => write!(f, "{}", s),
-            ExportTimestamp::Integer(i) => write!(f, "{}", i),
+            Self::String(s) => write!(f, "{}", s),
+            Self::Integer(i) => write!(f, "{}", i),
         }
     }
 }
 
-impl std::str::FromStr for ExportTimestamp {
-    type Err = ();
+impl FromStr for ExportTimestamp {
+    type Err = Infallible;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        if let Ok(i) = s.parse::<u64>() {
-            return Ok(ExportTimestamp::Integer(i));
-        }
-        Ok(ExportTimestamp::String(s.to_string()))
+        Ok(s.parse::<u64>()
+            .map(Self::Integer)
+            .unwrap_or_else(|_| Self::String(s.to_string())))
     }
 }
 
 impl Default for Uid {
     fn default() -> Self {
-        Uid::Integer(0)
+        Self::Integer(0)
     }
 }
 
 impl Display for Uid {
     fn fmt(&self, f: &mut Formatter) -> std::fmt::Result {
         match self {
-            Uid::String(s) => write!(f, "{}", s),
-            Uid::Integer(i) => write!(f, "{}", i),
+            Self::String(s) => write!(f, "{}", s),
+            Self::Integer(i) => write!(f, "{}", i),
         }
     }
 }
 
-impl std::str::FromStr for Uid {
-    type Err = Box<dyn Error>;
+impl FromStr for Uid {
+    type Err = Infallible;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        if let Ok(i) = s.parse::<u64>() {
-            return Ok(Uid::Integer(i));
-        }
-        Ok(Uid::String(s.to_string()))
+        Ok(s.parse::<u64>()
+            .map(Self::Integer)
+            .unwrap_or_else(|_| Self::String(s.to_string())))
     }
 }

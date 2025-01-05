@@ -1,6 +1,7 @@
 #[macro_use]
 mod enum_with_str;
 mod utils;
+use serde::{Deserialize, Serialize};
 
 pub mod hk4e;
 pub mod hkrpg;
@@ -10,7 +11,7 @@ pub use utils::*;
 /// 统一可交换抽卡记录标准 v4.0
 /// <https://uigf.org/standards/uigf.html>
 #[serde_with::skip_serializing_none]
-#[derive(Debug, Clone, Default, PartialEq, Hash, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, Default, PartialEq, Hash, Serialize, Deserialize)]
 pub struct UigfV4 {
     pub info: Info,
     pub hk4e: Option<Vec<hk4e::Hk4e>>,
@@ -19,7 +20,7 @@ pub struct UigfV4 {
 }
 
 /// 导出档案的 App 名称
-#[derive(Debug, Clone, PartialEq, Hash, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Hash, Serialize, Deserialize)]
 pub struct Info {
     /// 导出档案的时间戳，秒级
     pub export_timestamp: ExportTimestamp,
