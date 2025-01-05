@@ -181,6 +181,7 @@ dependencies = [
  "regex-lite",
  "serde",
  "serde_json",
+ "thiserror",
  "uigf",
  "url",
  "windows",
