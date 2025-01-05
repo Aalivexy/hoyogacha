@@ -86,7 +86,6 @@ pub struct SubCommandUrl {
     /// - hkrpgglobal (Honkai Star Rail)
     /// - napcn (绝区零)
     /// - napglobal (Zenless Zone Zero)
-
     #[argh(positional, from_str_fn(parse_game))]
     pub game: gacha::GameType,
 }

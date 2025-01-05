@@ -31,7 +31,7 @@ pub fn get_uigf_with_url_all(game_type: GameType, url: Url) -> Result<UigfV4, Bo
                     uid: data[0].uid.clone(),
                     timezone: data[0].timezone,
                     lang: data[0].lang,
-                    list: data.into_iter().map(|data| data.list).flatten().collect(),
+                    list: data.into_iter().flat_map(|data| data.list).collect(),
                 }]))
             }
         }
@@ -53,7 +53,7 @@ pub fn get_uigf_with_url_all(game_type: GameType, url: Url) -> Result<UigfV4, Bo
                     uid: data[0].uid.clone(),
                     timezone: data[0].timezone,
                     lang: data[0].lang,
-                    list: data.into_iter().map(|data| data.list).flatten().collect(),
+                    list: data.into_iter().flat_map(|data| data.list).collect(),
                 }]))
             }
         }
@@ -75,7 +75,7 @@ pub fn get_uigf_with_url_all(game_type: GameType, url: Url) -> Result<UigfV4, Bo
                     uid: data[0].uid.clone(),
                     timezone: data[0].timezone,
                     lang: data[0].lang,
-                    list: data.into_iter().map(|data| data.list).flatten().collect(),
+                    list: data.into_iter().flat_map(|data| data.list).collect(),
                 }]))
             }
         }

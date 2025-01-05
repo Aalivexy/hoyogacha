@@ -46,7 +46,7 @@ impl TryFrom<ResponseData> for Hk4e {
             timezone: value
                 .region_time_zone
                 .unwrap_or(get_time_zone_by_uid(&value.list[0].uid)),
-            lang: Some(value.list[0].lang.clone()),
+            lang: Some(value.list[0].lang),
             list: value
                 .list
                 .into_iter()
@@ -67,7 +67,7 @@ impl TryFrom<ResponseData> for Hkrpg {
         Ok(Self {
             uid: value.list[0].uid.parse()?,
             timezone: value.region_time_zone.unwrap(),
-            lang: Some(value.list[0].lang.clone()),
+            lang: Some(value.list[0].lang),
             list: value
                 .list
                 .into_iter()
@@ -87,7 +87,7 @@ impl TryFrom<ResponseData> for Nap {
         Ok(Self {
             uid: value.list[0].uid.parse()?,
             timezone: value.region_time_zone.unwrap(),
-            lang: Some(value.list[0].lang.clone()),
+            lang: Some(value.list[0].lang),
             list: value
                 .list
                 .into_iter()

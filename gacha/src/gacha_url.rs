@@ -39,7 +39,6 @@ pub fn get_gacha_url_with_game_data_path(
         get_latest_folder(game_data_path.as_ref().join("webCaches"))?
             .join("Cache/Cache_Data/data_2"),
     )?)
-    .to_string()
     .split("1/0/")
     .collect::<Vec<_>>()
     .into_iter()
