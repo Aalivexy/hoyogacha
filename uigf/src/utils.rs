@@ -1,7 +1,9 @@
 use crate::{hk4e::Hk4e, hkrpg::Hkrpg, nap::Nap, Info, UigfV4};
 use serde::{Deserialize, Serialize};
 use std::{
-    convert::Infallible, fmt::{Display, Formatter}, str::FromStr
+    convert::Infallible,
+    fmt::{Display, Formatter},
+    str::FromStr,
 };
 
 enum_with_str! {
