@@ -19,7 +19,7 @@ pub struct UigfV4 {
 }
 
 /// 导出档案的 App 名称
-#[derive(Debug, Clone, Default, PartialEq, Hash, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Hash, serde::Serialize, serde::Deserialize)]
 pub struct Info {
     /// 导出档案的时间戳，秒级
     pub export_timestamp: ExportTimestamp,

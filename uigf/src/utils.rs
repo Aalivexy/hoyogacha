@@ -44,12 +44,7 @@ pub enum Uid {
 
 impl UigfV4 {
     pub fn new() -> Self {
-        Self {
-            info: Info::new(),
-            hk4e: None,
-            hkrpg: None,
-            nap: None,
-        }
+        Self::default()
     }
 
     pub fn new_hk4e(hk4e: Vec<Hk4e>) -> Self {
@@ -91,9 +86,15 @@ impl Info {
     }
 }
 
+impl Default for Info {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ExportTimestamp {
     pub fn now() -> Self {
-        ExportTimestamp::Integer(
+        Self::Integer(
             std::time::SystemTime::now()
                 .duration_since(std::time::UNIX_EPOCH)
                 .unwrap()
@@ -104,7 +105,7 @@ impl ExportTimestamp {
 
 impl Default for ExportTimestamp {
     fn default() -> Self {
-        ExportTimestamp::now()
+        Self::now()
     }
 }
 
