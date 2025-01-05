@@ -43,14 +43,6 @@ pub enum Uid {
 }
 
 impl UigfV4 {
-    pub fn to_json(&self) -> Result<String, Box<dyn std::error::Error>> {
-        Ok(serde_json::to_string(self)?)
-    }
-
-    pub fn from_json(json: &str) -> Result<Self, Box<dyn std::error::Error>> {
-        Ok(serde_json::from_str(json)?)
-    }
-
     pub fn new() -> Self {
         Self {
             info: Info::new(),
@@ -110,6 +102,12 @@ impl ExportTimestamp {
     }
 }
 
+impl Default for ExportTimestamp {
+    fn default() -> Self {
+        ExportTimestamp::now()
+    }
+}
+
 impl Display for ExportTimestamp {
     fn fmt(&self, f: &mut Formatter) -> std::fmt::Result {
         match self {
@@ -127,6 +125,12 @@ impl std::str::FromStr for ExportTimestamp {
             return Ok(ExportTimestamp::Integer(i));
         }
         Ok(ExportTimestamp::String(s.to_string()))
+    }
+}
+
+impl Default for Uid {
+    fn default() -> Self {
+        Uid::Integer(0)
     }
 }
 

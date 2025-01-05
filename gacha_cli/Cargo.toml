@@ -6,4 +6,5 @@ edition = "2021"
 [dependencies]
 argh = "0.1"
 gacha = { path = "../gacha" }
+serde_json = "1"
 url = "2"

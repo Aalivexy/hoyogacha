@@ -254,6 +254,7 @@ version = "0.1.0"
 dependencies = [
  "argh",
  "gacha",
+ "serde_json",
  "url",
 ]
 
@@ -900,7 +901,6 @@ name = "uigf"
 version = "0.1.0"
 dependencies = [
  "serde",
- "serde_json",
  "serde_with",
 ]
 

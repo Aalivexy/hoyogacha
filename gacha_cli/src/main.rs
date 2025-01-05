@@ -55,15 +55,14 @@ fn process_command(
             cn_game_type
         })?
     };
-    let uigf = gacha::get_uigf_with_url_all(
+    let uigf = serde_json::to_string(&gacha::get_uigf_with_url_all(
         if global {
             global_game_type
         } else {
             cn_game_type
         },
         url,
-    )?
-    .to_json()?;
+    )?)?;
     match output {
         Some(p) => std::fs::write(p, uigf)?,
         None => println!("{}", uigf),
