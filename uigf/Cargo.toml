@@ -6,3 +6,4 @@ edition = "2021"
 [dependencies]
 serde = { version = "1", features = ["serde_derive"] }
 serde_with_macros = "3"
+thiserror = "2"

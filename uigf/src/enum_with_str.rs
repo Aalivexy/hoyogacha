@@ -1,4 +1,9 @@
-#[macro_export]
+#[derive(thiserror::Error, Debug)]
+pub enum EnumParseError {
+    #[error("invalid variant: {0}")]
+    InvalidVariant(String),
+}
+
 macro_rules! enum_with_str {
     ($(#[$enum_meta:meta])* $name:ident { $($(#[$meta:meta])* $variant:ident => $str_val:expr),* $(,)? }) => {
         $(#[$enum_meta])*
@@ -36,27 +41,27 @@ macro_rules! enum_with_str {
         }
 
         impl ::core::str::FromStr for $name {
-            type Err = ::std::boxed::Box<dyn ::std::error::Error>;
+            type Err = $crate::EnumParseError;
 
             fn from_str(input: &str) -> ::core::result::Result<$name, Self::Err> {
                 match input {
                     $(
                         $str_val => Ok($name::$variant),
                     )*
-                    _ => Err("invalid enum string".into()),
+                    _ => Err($crate::EnumParseError::InvalidVariant(input.to_string())),
                 }
             }
         }
 
         impl ::core::convert::TryFrom<::std::string::String> for $name {
-            type Error = ::std::boxed::Box<dyn ::std::error::Error>;
+            type Error = $crate::EnumParseError;
 
             fn try_from(value: ::std::string::String) -> ::core::result::Result<Self, Self::Error> {
                 match value.as_str() {
                     $(
                         $str_val => Ok($name::$variant),
                     )*
-                    _ => Err("invalid enum string".into()),
+                    _ => Err($crate::EnumParseError::InvalidVariant(value)),
                 }
             }
         }
